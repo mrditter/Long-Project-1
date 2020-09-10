@@ -31,18 +31,69 @@ def one_point(grid, color, x, y):
     grid[a][b] = int(color)
     return grid
 
+def horiz_line(grid, color, x1, y1, x2, y2):
+    a, b = (len(grid) - 1), 0
+    a = a - y1
+    b = b + x1
+    while b <= x2 :
+        grid[a][b] = int(color)
+        b += 1
+    return grid
 
-#def horiz_line():
+def vert_line():
+    pass
 
+def filled_rect(): 
+    pass
 
-#def vert_line():
+def hollow_rect():
+    pass
 
+def check_horiz_line(com, grid) :
+    if int(com[1]) < 0 :
+        return False
+    if int(com[1]) > 9 :
+        return False
+    if int(com[2]) < 0 :
+        return False
+    if int(com[2]) >= len(grid[0]) :
+        return False
+    if int(com[3]) >= len(grid) :
+        return False
+    if int(com[3]) < 0 :
+        return False
+    if int(com[4]) < 0 :
+        return False
+    if int(com[4]) < int(com[2]) :
+        return False
+    if int(com[5]) < 0:
+        return False
+    if int(com[5]) != int(com[3]) :
+        return False
+    return True
 
-#def filled_rect(): 
-
-
-#def hollow_rect():
-
+def check_vert_line(com, grid) :
+    if int(com[1]) < 0 :
+        return False
+    if int(com[1]) > 9 :
+        return False
+    if int(com[2]) < 0 :
+        return False
+    if int(com[2]) >= len(grid[0]) :
+        return False
+    if int(com[3]) >= len(grid) :
+        return False
+    if int(com[3]) < 0 :
+        return False
+    if int(com[4]) < 0 :
+        return False
+    if int(com[4]) < int(com[2]) :
+        return False
+    if int(com[5]) < 0:
+        return False
+    if int(com[5]) != int(com[3]) :
+        return False
+    return True
 
 def main():
     a = 1
@@ -91,6 +142,21 @@ def main():
             except:
                 print("Input error: Issue with set command. (set <color> <x> <y>)")
                 continue
+        elif com[0] == 'horiz_line':
+            try:
+                if check_horiz_line(com, grid) :
+                    grid = horiz_line(grid, int(com[1]), int(com[2]), int(com[3]), int(com[4]), int(com[5]))
+            except:
+                print("Input error: Issue with horiz_line command."\
+                +" (horiz_line <color> <x1> <y1> <x2> <y2>)")
+                continue
+        elif com[0] == 'vert_line' :
+            try:
+                if check_vert_line(com, grid) :
+                    grid = vert_line()
+            except:
+                print("Input error: Issue with vert_line command."\
+                    +" (vert_line <color> <x1> <y1> <x2> <y2>)")
         else :
             print("Input error: Invalid command.")
 
